@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How to use bun on windows powershell</title>
+    <title>Using bun on Windows PowerShell</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/font-awesome.min.css">
     <style>
@@ -40,49 +40,42 @@
         </header>
         <div class="row">
             <div class="col-12">
-                <h2>How to use bun (complete linux version) on powershell core</h2>
+                <h2>How to Use 'bun' (Linux Package Manager) on PowerShell Core</h2>
                 <p>
-                    Yesterday I decided to give bun a try as a replacement for npm on a personal side project. However I use Windows 11 as my daily driver and the windows version is not feature complete.
+                    Exploring 'bun' as a replacement for npm on a personal project is enticing. However, when using Windows 11 as your primary operating system, the Windows version of 'bun' might lack certain features.
                 </p>
                 <p class="mb-2">
-                    The main option is to use WSL to run bun, but I wanted to continue to use powershell as the only terminal I use on windows, so after some search and messing around I figured this solution:
+                    Primarily, leveraging WSL (Windows Subsystem for Linux) to run 'bun' seems logical. Yet, if PowerShell is your preferred terminal on Windows, here's a solution that allows 'bun' to function within your PowerShell environment:
                 </p>
+                <h3>Instructions:</h3>
+                <ol>
+                    <li>
+                        <p>If not done already, enable WSL and install a Linux distribution from the Microsoft Store (such as Ubuntu).</p>
+                    </li>
+                    <li>
+                        <p>In your WSL terminal, install 'bun' using the bash script available at <a href="https://bun.sh/package-manager" target="_blank">https://bun.sh/package-manager</a>.</p>
+                    </li>
+                    <li>
+                        <p>Within your WSL terminal, edit the file <code>~/.bashrc</code> using any text editor. Comment out the lines containing <span class="quote">export BUN_INSTALL="$HOME/.bun"</span> and <span class="quote">export PATH=$BUN_INSTALL/bin:$PATH</span> by adding a <code>#</code> at the beginning of each line.</p>
+                    </li>
+                    <li>
+                        <p>Copy the contents from the 'bun' folder <span class="quote">.bun/bin/</span> to <span class="quote">/usr/bin/</span> using a command like:<br/>
+                        <code>sudo cp .bun/bin/bun /usr/bin/bun</code><br/>
+                        <code>sudo cp .bun/bin/bunx /usr/bin/bunx</code></p>
+                    </li>
+                    <li>
+                        <p>In PowerShell, execute <code>Install-Module WslInterop</code>.</p>
+                    </li>
+                    <li>
+                        <p>Edit your PowerShell profile and add <code>Import-WslCommand "bun"</code>.</p>
+                    </li>
+                </ol>
                 <p>
-                    Part 1.
-                    If you don't have it already, enable wsl and install a distro from ms store (I'm using ubuntu)
-                </p>
-                <p>
-                    Part 2.
-                    Open your wsl terminal and install bun using the bash script from <a href="https://bun.sh/package-manager" target="_blank">https://bun.sh/package-manager</a>
-                </p>
-                <p>
-                    Part 3.
-                    On your wsl terminal, edit the file ~/.bashrc using any text editor and comment out the lines containing 
-                    <span class="quote">export BUN_INSTALL="$HOME/.bun"</span> and <span class="quote">export PATH=$BUN_INSTALL/bin:$PATH</span>
-                    by addin a <span class="quote">#</span> to the beggining of each line
-                </p>
-                <p>
-                    Part 3.
-                    Copy content from bun folder <span class="quote">.bun/bin/</span> to <span class="quote">/usr/bin/</span> using something like: <br/>
-                    <span class="quote">sudo cp .bun/bin/bun /usr/bin/bun</span><br/>
-                    <span class="quote">sudo cp .bun/bin/bunx /usr/bin/bunx</span>
-                </p>
-                <p>
-                    Part 4.
-                    On your powershell, install <span class="quote">Install-Module WslInterop</span>
-                </p>
-                <p>
-                    Part 5.
-                    Open your powershell profile and add <span class="quote">Import-WslCommand "bun"</span>
-                </p>
-                <p>
-                    After all theses steps, just re-open your powershell and bun should be available like it was installed on your windows.
+                    After completing these steps, reopen your PowerShell, and 'bun' should be available as if it were installed directly on your Windows environment.
                 </p>
             </div>
         </div>
     </div>
-
-
 
     <script src="../js/jquery-3.2.1.slim.min.js"></script>
     <script src="../js/popper.min.js"></script>
